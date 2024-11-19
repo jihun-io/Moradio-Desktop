@@ -24,7 +24,7 @@ function createWindow(): void {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js"), // 컴파일된 JS 파일 사용
+      preload: path.join(__dirname, "preload.js"),
     },
     icon: path.join(__dirname, "/assets/icons/icon_128x128@2x.png"),
   });
