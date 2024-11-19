@@ -26,6 +26,7 @@ function createWindow(): void {
       contextIsolation: true,
       preload: path.join(__dirname, "preload.js"), // 컴파일된 JS 파일 사용
     },
+    icon: path.join(__dirname, "/assets/icons/icon_128x128@2x.png"),
   });
 
   const template: MenuItemConstructorOptions[] = [
