@@ -56,11 +56,12 @@
   "main": "build/main.js",
   "homepage": "./",
   "devDependencies": {
+    "@electron/notarize": "^2.5.0",
     "@types/hls.js": "^0.13.3",
-    "tailwindcss": "^3.4.15",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
-    "electron-is-dev": "^3.0.1"
+    "electron-is-dev": "^3.0.1",
+    "tailwindcss": "^3.4.15"
   },
   "build": {
     "extends": null,
@@ -74,7 +75,21 @@
       "output": "dist"
     },
     "mac": {
-      "category": "public.app-category.music"
+      "icon": "assets/icons/mac/icon_512x512@2x.icns",
+      "category": "public.app-category.music",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "identity": "Jihun Kim (62494T7ZTJ)"
+    },
+    "afterSign": "./scripts/notarize.js",
+    "win": {
+      "icon": "assets/icons/windows/icon.ico"
     }
   }
 }
