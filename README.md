@@ -7,10 +7,11 @@
 ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare%20Workers-F38020?style=for-the-badge&logo=CloudflareWorkers&logoColor=white)
 ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=CloudflarePages&logoColor=white)
 
-![Moradio Electron 데스크톱 앱 스크린샷](https://github.com/user-attachments/assets/8bbaf7fb-13a3-4b8b-90c9-5d1e6ad532cc)
+![Moradio Electron 데스크톱 앱 스크린샷](https://github.com/user-attachments/assets/03f4bc4b-758f-468b-a10f-d676d5505d56)
 
 > 모두 모아둔 모두의 라디오
 >
+> 
 **다운로드:** [https://github.com/jihun-io/Moradio-Electron/releases](https://github.com/jihun-io/Moradio-Electron/releases)
 
 ## 프로젝트 소개
