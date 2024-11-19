@@ -10,6 +10,8 @@
 ![Moradio Electron 데스크톱 앱 스크린샷](https://github.com/user-attachments/assets/8bbaf7fb-13a3-4b8b-90c9-5d1e6ad532cc)
 
 > 모두 모아둔 모두의 라디오
+>
+**다운로드:** [https://github.com/jihun-io/Moradio-Electron/releases](https://github.com/jihun-io/Moradio-Electron/releases)
 
 ## 프로젝트 소개
 
@@ -32,7 +34,11 @@
 - 최근 재생한 방송국 목록이 저장됩니다.
 - 다크 모드를 지원합니다.
 
-## 4. 데스크톱 앱을 제작하게 된 계기
+## 4. 지원하는 디바이스
+- Windows (x64)
+- macOS (Apple silicon, x64)
+
+## 5. 데스크톱 앱을 제작하게 된 계기
 
 처음에는 데스크톱 사용자를 위해 웹 애플리케이션으로 제작되었고, 며칠 간 인터넷 상에 배포를 하기도 했습니다. 그러나 일부 방송국의 스트리밍이 재생되지 않는 이슈가 존재했습니다. 원인을 분석해 보니, 암호화되지 않은 HTTP로 URL을 제공하는 방송국의 스트리밍이 HTTPS로 동작하는 프론트엔드 상에서는 Mixed Content 이슈로 동작하지 않는다는 점을 확인할 수 있었습니다.
 
@@ -40,14 +46,14 @@
 
 Electron 프레임워크를 선택한 이유는 기존에 개발한 웹 버전 Moradio의 코드를 재활용하고 싶었기 때문입니다. 기존의 웹 버전 Moradio가 React 기반의 Next.js 프레임워크로 개발되었기에 Electron 앱으로 포팅하기 쉬울 것이라고 판단했고, 실제로도 포팅 과정이 매우 용이했습니다.
 
-## 5. 도움을 주신 분
+## 6. 도움을 주신 분
 
 각 방송사의 라디오 스트리밍 URL을 정리해 주신 [**블루스크린 (BSofDeath)**](https://github.com/BSofDeath)님께 진심으로 감사드립니다. 블루스크린님의 프로젝트 덕분에 Moradio를 개발할 수 있었습니다.
 
 - 참고한 블로그 게시글은 다음과 같습니다: https://blog.bsod.kr/137
 - 참고한 GitHub 리포지토리는 다음과 같습니다: https://github.com/BSofDeath/radio.bsod.kr
 
-## 6. 방송사 목록
+## 7. 방송사 목록
 
 - KBS
   - KBS 1라디오
@@ -105,12 +111,12 @@ Electron 프레임워크를 선택한 이유는 기존에 개발한 웹 버전 M
   - 국방FM
   - 국악방송
  
-## 7. 향후 계획
+## 8. 향후 계획
 
 - [ ] 즐겨찾기 기능 추가
 - [ ] 방송국 검색 기능 추가
 
-## 8. 참고 사항
+## 9. 참고 사항
 
 - Moradio는 각 방송사의 공개된 라디오 스트리밍 URL을 접속자의 디바이스로 중개하는 애플리케이션이며, Moradio는 방송을 절대 녹취하거나 재송신하지 않습니다.
 
