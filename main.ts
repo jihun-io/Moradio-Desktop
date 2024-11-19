@@ -116,7 +116,7 @@ app.setAboutPanelOptions({
   applicationName: "Moradio",
   applicationVersion: app.getVersion(),
   copyright: "Copyright © 2024 Jihun Kim",
-  credits: "모두를 위한 모두의 라디오, Moradio",
+  credits: "모두 모아둔 모두의 라디오, Moradio",
 });
 
 app.whenReady().then(createWindow);
