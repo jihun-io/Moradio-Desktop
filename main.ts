@@ -4,6 +4,7 @@ import {
   Menu,
   MenuItemConstructorOptions,
   shell,
+  Tray,
 } from "electron";
 import * as path from "path";
 import * as dotenv from "dotenv";
@@ -14,6 +15,10 @@ app.name = "Moradio";
 app.setName("Moradio");
 
 const isDev = process.env.NODE_ENV === "development";
+const isWindows = process.platform === "win32";
+let mainWindow: BrowserWindow | null = null;
+let tray: Tray | null = null;
+let isQuitting = false;
 
 function createWindow(): void {
   mainWindow = new BrowserWindow({
@@ -41,7 +46,13 @@ function createWindow(): void {
         { role: "hideOthers", label: "다른 창 숨기기" },
         { role: "unhide", label: "모두 보기" },
         { type: "separator" },
-        { role: "quit", label: "Moradio 종료" },
+        {
+          label: "Moradio 종료",
+          click: () => {
+            isQuitting = true;
+            app.quit();
+          },
+        },
       ],
     },
   ];
@@ -49,15 +60,62 @@ function createWindow(): void {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  // 개발 모드에서는 개발 서버의 주소를 로드
-  if (isDev) {
-    win.loadURL("http://localhost:3000");
-    // 개발자 도구 열기
-    win.webContents.openDevTools();
-  } else {
-    // 프로덕션 모드에서는 빌드된 파일을 로드
-    win.loadFile(path.join(__dirname, "../build/index.html"));
+  // Windows에서만 트레이 아이콘 생성
+  if (isWindows) {
+    createTray();
   }
+
+  // 모든 플랫폼에서 창 닫기 버튼 클릭 시 숨기기
+  mainWindow.on("close", (event) => {
+    if (!isQuitting) {
+      event.preventDefault();
+      mainWindow?.hide();
+      return false;
+    }
+  });
+
+  if (isDev) {
+    mainWindow.loadURL("http://localhost:3000");
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
+  }
+}
+
+function createTray() {
+  if (!isWindows) return;
+
+  const iconPath = path.join(__dirname, "/assets/icons/icon_16x16@2x.png");
+  tray = new Tray(iconPath);
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "창 열기",
+      click: () => mainWindow?.show(),
+    },
+    { type: "separator" },
+    {
+      label: "재생/일시정지",
+      click: () => {
+        mainWindow?.webContents.send("toggle-playback");
+      },
+    },
+    { type: "separator" },
+    {
+      label: "종료",
+      click: () => {
+        isQuitting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setContextMenu(contextMenu);
+  tray.setToolTip("Moradio");
+
+  tray.on("double-click", () => {
+    mainWindow?.show();
+  });
 }
 
 app.setAboutPanelOptions({
@@ -67,18 +125,27 @@ app.setAboutPanelOptions({
   credits: "모두를 위한 모두의 라디오, Moradio",
 });
 
-// Electron이 준비되면 창을 생성
 app.whenReady().then(createWindow);
 
-// 모든 창이 닫히면 앱 종료 (macOS 제외)
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
+// Dock 아이콘 클릭 또는 앱 재실행 시
+app.on("activate", () => {
+  // 창이 닫혀있으면 다시 표시
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  } else {
+    mainWindow?.show();
   }
 });
 
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+// 모든 창이 닫혀도 앱 종료하지 않음
+app.on("window-all-closed", () => {
+  // Windows가 아닌 경우에도 앱을 종료하지 않음
+  // if (process.platform !== "darwin") {
+  //   app.quit();
+  // }
+});
+
+// 앱 종료 전 정리
+app.on("before-quit", () => {
+  isQuitting = true;
 });
