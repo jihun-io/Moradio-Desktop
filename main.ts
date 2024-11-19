@@ -31,7 +31,7 @@ function createWindow(): void {
       contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
     },
-    icon: path.join(__dirname, "/assets/icons/icon_128x128@2x.png"),
+    icon: path.join(__dirname, "../assets/icons/icon_128x128@2x.png"),
   });
 
   const template: MenuItemConstructorOptions[] = [
@@ -63,6 +63,7 @@ function createWindow(): void {
   // Windows에서만 트레이 아이콘 생성
   if (isWindows) {
     createTray();
+    mainWindow.setMenu(null);
   }
 
   // 모든 플랫폼에서 창 닫기 버튼 클릭 시 숨기기
@@ -85,7 +86,7 @@ function createWindow(): void {
 function createTray() {
   if (!isWindows) return;
 
-  const iconPath = path.join(__dirname, "/assets/icons/icon_16x16@2x.png");
+  const iconPath = path.join(__dirname, "../assets/icons/icon_16x16@2x.png");
   tray = new Tray(iconPath);
 
   const contextMenu = Menu.buildFromTemplate([
