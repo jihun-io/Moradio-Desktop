@@ -16,10 +16,11 @@ app.setName("Moradio");
 const isDev = process.env.NODE_ENV === "development";
 
 function createWindow(): void {
-  // 브라우저 창 생성
-  const win = new BrowserWindow({
-    width: 1200,
+  mainWindow = new BrowserWindow({
+    width: 600,
     height: 800,
+    minWidth: 320,
+    minHeight: 480,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
