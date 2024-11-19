@@ -1,4 +1,4 @@
-# Moradio Electron 데스크톱 앱
+# Moradio 데스크톱 앱
 
 ![Electron](https://img.shields.io/badge/Electron-47848F?style=for-the-badge&logo=Electron&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black)
