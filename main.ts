@@ -13,7 +13,7 @@ dotenv.config();
 app.name = "Moradio";
 app.setName("Moradio");
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV === "development";
 
 function createWindow(): void {
   // 브라우저 창 생성
