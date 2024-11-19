@@ -12,7 +12,7 @@
 > 모두 모아둔 모두의 라디오
 >
 > 
-**다운로드:** [https://github.com/jihun-io/Moradio-Electron/releases](https://github.com/jihun-io/Moradio-Electron/releases)
+**다운로드:** [https://github.com/jihun-io/Moradio-Desktop/releases](https://github.com/jihun-io/Moradio-Desktop/releases)
 
 ## 프로젝트 소개
 
