@@ -154,7 +154,7 @@ const MiniPlayer = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="#dc2e2e"
-              className="size-6"
+              className="size-8"
             >
               <path
                 fillRule="evenodd"
