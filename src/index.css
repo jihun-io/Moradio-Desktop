@@ -1,13 +1,88 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --highlight: #dc2e2e;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --highlight: #dc2e2e;
+  }
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Pretendard Variable";
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.embla {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  cursor: grab;
+}
+
+.embla__container {
+  display: flex;
+  width: 10rem;
+  column-gap: 1.5rem;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  user-select: none;
+  cursor: pointer;
+}
+
+.embla__slide > button {
+  display: none;
+}
+
+.embla__slide:hover > button {
+  display: block;
+}
+
+input.volume-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 0.25rem;
+}
+
+input.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: var(--highlight);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
