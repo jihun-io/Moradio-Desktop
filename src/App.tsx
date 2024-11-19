@@ -5,6 +5,7 @@ import { useAudioStore, removeRecentStation } from "./store/useAudioStore";
 import { useRegionStore } from "./store/useRegionStore";
 import StationsList from "./components/stationsList";
 import { useEffect, useRef } from "react";
+import React from "react";
 
 export default function Home() {
   const { recentStations, setStation } = useAudioStore();
@@ -85,7 +86,7 @@ export default function Home() {
     <>
       <header className="py-8 px-8 sticky top-0 bg-background z-[100] shadow-sm flex justify-between">
         <h1 className="flex justify-center items-center text-4xl font-bold">
-          <img src="/images/logo/logo-text.svg" width={120} alt="Moradio" />
+          <img src="./images/logo/logo-text.svg" width={120} alt="Moradio" />
         </h1>
         <button className="p-2" onClick={handleDialogOpen}>
           <svg

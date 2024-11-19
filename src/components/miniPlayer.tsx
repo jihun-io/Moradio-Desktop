@@ -79,7 +79,7 @@ const MiniPlayer = () => {
           <img
             src={
               !currentStation
-                ? "/images/logo/logo-square.svg"
+                ? "./images/logo/logo-square.svg"
                 : currentStation?.logo
             }
             width={64}
@@ -89,7 +89,7 @@ const MiniPlayer = () => {
           />
         ) : (
           <img
-            src="/images/logo/logo-square.svg"
+            src="./images/logo/logo-square.svg"
             width={64}
             height={64}
             className="w-16 h-16 object-contain rounded-md"

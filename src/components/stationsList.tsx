@@ -2,6 +2,7 @@ import { ReactElement, useState, useEffect } from "react";
 import { Embla, EmblaSlide, EmblaContainer } from "../components/embla";
 import { useAudioStore } from "../store/useAudioStore";
 import { useRegionStore } from "../store/useRegionStore";
+import React from "react";
 
 interface Station {
   category: string;
@@ -122,13 +123,13 @@ export default function StationsList(): ReactElement {
                                 : `&city=${localChannel.city}`
                             }`,
                             name: `${localChannel.name} ${channel.name}`,
-                            logo: `/images/stations/${station.id.toLowerCase()}${channel.id.toLowerCase()}.svg`,
+                            logo: `./images/stations/${station.id.toLowerCase()}${channel.id.toLowerCase()}.svg`,
                           })
                         }
                       >
                         <img
                           className="rounded-lg mb-2"
-                          src={`/images/stations/${station.id.toLowerCase()}${channel.id.toLowerCase()}.svg`}
+                          src={`./images/stations/${station.id.toLowerCase()}${channel.id.toLowerCase()}.svg`}
                           alt={station.name}
                         />
                         <h3 className="text-sm">{`${localChannel.name} ${channel.name}`}</h3>
@@ -148,13 +149,13 @@ export default function StationsList(): ReactElement {
                               : `&city=${channel.city}`
                           }`,
                           name: `${channel.name}`,
-                          logo: `/images/stations/${station.id}.svg`,
+                          logo: `./images/stations/${station.id}.svg`,
                         })
                       }
                     >
                       <img
                         className="rounded-lg mb-2"
-                        src={`/images/stations/${station.id}.svg`}
+                        src={`./images/stations/${station.id}.svg`}
                         alt={channel.name}
                       />
                       <h3 className="text-sm">{channel.name}</h3>
