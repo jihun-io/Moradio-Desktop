@@ -8,6 +8,7 @@ import {
 } from "electron";
 import * as path from "path";
 import * as dotenv from "dotenv";
+import * as fs from "fs";
 
 dotenv.config();
 
@@ -19,6 +20,33 @@ const isWindows = process.platform === "win32";
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null;
 let isQuitting = false;
+let trayCreated = false;
+
+function getAssetPath(asset: string): string {
+  let iconPath = "";
+
+  if (isDev) {
+    iconPath = path.join(__dirname, `../assets/${asset}`);
+  } else {
+    // Windows에서 asar 패키징된 경우 처리
+    iconPath = isWindows
+      ? path
+          .join(process.resourcesPath, "assets", asset)
+          .replace("app.asar", "app.asar.unpacked")
+      : path.join(process.resourcesPath, "assets", asset);
+  }
+
+  // 파일 존재 여부 확인 및 로깅
+  if (!fs.existsSync(iconPath)) {
+    console.error(`Asset not found at path: ${iconPath}`);
+    console.log("Current directory:", __dirname);
+    console.log("Resource path:", process.resourcesPath);
+    return "";
+  }
+
+  console.log(`Asset found at: ${iconPath}`);
+  return iconPath;
+}
 
 function createWindow(): void {
   mainWindow = new BrowserWindow({
@@ -26,12 +54,14 @@ function createWindow(): void {
     height: 800,
     minWidth: 320,
     minHeight: 480,
+    // Windows에서는 메뉴바 없이 생성
+    autoHideMenuBar: isWindows,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: `${__dirname}/preload.js`,
     },
-    icon: path.join(__dirname, "../assets/icons/icon_128x128@2x.png"),
+    icon: getAssetPath("icons/icon_128x128@2x.png"),
   });
 
   const template: MenuItemConstructorOptions[] = [
@@ -75,41 +105,73 @@ function createWindow(): void {
     }
   });
 
+  mainWindow.loadURL(
+    isDev ? "http://localhost:3000" : `file://${__dirname}/../build/index.html`
+  );
   if (isDev) {
-    mainWindow.loadURL("http://localhost:3000");
     mainWindow.webContents.openDevTools();
-  } else {
-    mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
   }
 }
 
 function createTray() {
-  if (!isWindows) return;
+  if (!isWindows || trayCreated) return;
 
-  const iconPath = path.join(__dirname, "../assets/icons/icon_16x16@2x.png");
-  tray = new Tray(iconPath);
+  const iconPath = getAssetPath("icons/windows/icon_sm.ico");
+  console.log("Trying to create tray with icon:", iconPath);
 
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: "창 열기",
-      click: () => mainWindow?.show(),
-    },
-    { type: "separator" },
-    {
-      label: "종료",
-      click: () => {
-        isQuitting = true;
-        app.quit();
-      },
-    },
-  ]);
+  try {
+    if (!fs.existsSync(iconPath)) {
+      console.error(`Tray icon not found at: ${iconPath}`);
+      return;
+    }
 
-  tray.setContextMenu(contextMenu);
-  tray.setToolTip("Moradio");
+    setTimeout(() => {
+      try {
+        tray = new Tray(iconPath);
+        trayCreated = true;
 
-  tray.on("double-click", () => {
-    mainWindow?.show();
-  });
+        const contextMenu = Menu.buildFromTemplate([
+          {
+            label: "창 열기/숨기기",
+            click: () => {
+              if (mainWindow?.isVisible()) {
+                mainWindow.hide();
+              } else {
+                mainWindow?.show();
+                mainWindow?.focus();
+              }
+            },
+          },
+          { type: "separator" },
+          {
+            label: "종료",
+            click: () => {
+              isQuitting = true;
+              app.quit();
+            },
+          },
+        ]);
+
+        tray.setContextMenu(contextMenu);
+        tray.setToolTip("Moradio");
+
+        tray.on("double-click", () => {
+          if (mainWindow?.isVisible()) {
+            mainWindow.hide();
+          } else {
+            mainWindow?.show();
+            mainWindow?.focus();
+          }
+        });
+
+        console.log("Tray created successfully");
+      } catch (error) {
+        console.error("Delayed tray creation failed:", error);
+      }
+    }, 1000);
+  } catch (error) {
+    console.error("Failed to create tray:", error);
+  }
 }
 
 app.setAboutPanelOptions({
@@ -119,7 +181,9 @@ app.setAboutPanelOptions({
   credits: "모두 모아둔 모두의 라디오, Moradio",
 });
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+});
 
 // Dock 아이콘 클릭 또는 앱 재실행 시
 app.on("activate", () => {
@@ -129,14 +193,6 @@ app.on("activate", () => {
   } else {
     mainWindow?.show();
   }
-});
-
-// 모든 창이 닫혀도 앱 종료하지 않음
-app.on("window-all-closed", () => {
-  // Windows가 아닌 경우에도 앱을 종료하지 않음
-  // if (process.platform !== "darwin") {
-  //   app.quit();
-  // }
 });
 
 // 앱 종료 전 정리
