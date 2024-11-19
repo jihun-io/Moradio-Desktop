@@ -95,13 +95,6 @@ function createTray() {
     },
     { type: "separator" },
     {
-      label: "재생/일시정지",
-      click: () => {
-        mainWindow?.webContents.send("toggle-playback");
-      },
-    },
-    { type: "separator" },
-    {
       label: "종료",
       click: () => {
         isQuitting = true;
