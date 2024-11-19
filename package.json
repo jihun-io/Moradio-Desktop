@@ -33,6 +33,7 @@
     "build:electron": "tsc main.ts preload.ts --outDir ./build",
     "electron:serve": "npm run build:electron && concurrently -k \"cross-env BROWSER=none NODE_ENV=development npm start\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
     "electron:build": "cross-env NODE_ENV=production npm run build && npm run build:electron && electron-builder",
+    "electron:build-win": "npm run build && npm run build:electron && electron-builder",
     "electron:start": "electron ."
   },
   "eslintConfig": {
