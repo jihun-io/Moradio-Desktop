@@ -1,5 +1,8 @@
 # Moradio 데스크톱 앱
 
+> [!Important]
+> 웹 버전 Moradio 프로젝트는 Moradio 데스크톱 앱 프로젝트로 변경되었습니다. 자세한 내용은 [아래 문단](https://github.com/jihun-io/Moradio-Desktop/edit/main/README.md#5-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1-%EC%95%B1%EC%9D%84-%EC%A0%9C%EC%9E%91%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0)에서 확인할 수 있습니다.
+
 ![Electron](https://img.shields.io/badge/Electron-47848F?style=for-the-badge&logo=Electron&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white)
