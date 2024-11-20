@@ -20,6 +20,7 @@
 
 html {
   font-size: 12px;
+  word-break: keep-all;
 }
 
 body {
