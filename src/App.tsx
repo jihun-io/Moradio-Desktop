@@ -105,7 +105,10 @@ export default function Home() {
           </svg>
         </button>
       </header>
-      <main className="px-8 h-full overflow-scroll" ref={mainRef}>
+      <main
+        className="px-8 h-full overflow-y-scroll overflow-x-hidden"
+        ref={mainRef}
+      >
         <section>
           <h2 className="py-4 text-2xl font-bold">최근 재생한 방송국</h2>
           {recentStations.length > 0 ? (
