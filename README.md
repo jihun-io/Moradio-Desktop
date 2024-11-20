@@ -8,7 +8,6 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white)
 ![Cloudflare Workers](https://img.shields.io/badge/Cloudflare%20Workers-F38020?style=for-the-badge&logo=CloudflareWorkers&logoColor=white)
-![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=CloudflarePages&logoColor=white)
 
 ![Moradio Electron 데스크톱 앱 스크린샷](https://github.com/user-attachments/assets/03f4bc4b-758f-468b-a10f-d676d5505d56)
 
