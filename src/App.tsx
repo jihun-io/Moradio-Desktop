@@ -84,7 +84,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="py-8 px-8 sticky top-0 bg-background z-[100] shadow-sm flex justify-between">
+      <header className="py-6 px-8 sticky top-0 bg-background z-[100] shadow-sm flex justify-between">
         <h1 className="flex justify-center items-center text-4xl font-bold">
           <img src="./images/logo/logo-text.svg" width={120} alt="Moradio" />
         </h1>
