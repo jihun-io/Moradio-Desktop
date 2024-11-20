@@ -84,7 +84,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="py-6 px-8 sticky top-0 bg-background z-[100] shadow-sm flex justify-between">
+      <header className="py-6 px-8 bg-background z-[100] shadow-sm flex justify-between">
         <h1 className="flex justify-center items-center text-4xl font-bold">
           <img src="./images/logo/logo-text.svg" width={120} alt="Moradio" />
         </h1>
@@ -105,7 +105,7 @@ export default function Home() {
           </svg>
         </button>
       </header>
-      <main className="px-8" ref={mainRef}>
+      <main className="px-8 h-full overflow-scroll" ref={mainRef}>
         <section>
           <h2 className="py-4 text-2xl font-bold">최근 재생한 방송국</h2>
           {recentStations.length > 0 ? (
@@ -171,7 +171,7 @@ export default function Home() {
           </p>
         </section>
       </main>
-      <footer className="py-4 bg-background sticky bottom-0 z-[100] shadow-inner">
+      <footer className="py-4 bg-background shadow-inner">
         <MiniPlayer />
       </footer>
       <dialog
