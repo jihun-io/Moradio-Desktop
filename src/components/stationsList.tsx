@@ -1,5 +1,4 @@
 import { ReactElement, useState, useEffect } from "react";
-import { Embla, EmblaSlide, EmblaContainer } from "../components/embla";
 import { useAudioStore } from "../store/useAudioStore";
 import { useRegionStore } from "../store/useRegionStore";
 import React from "react";
@@ -103,13 +102,14 @@ export default function StationsList(): ReactElement {
       {Object.entries(groupedStations).map(([category, stationList]) => (
         <section key={category}>
           <h2 className="py-4 text-2xl font-bold">{category}</h2>
-          <Embla>
-            <EmblaContainer>
+          <div className="overflow-x-auto overflow-y-hidden scrollbar-custom">
+            <ul className="w-fit flex flex-row gap-x-4 pb-4">
               {stationList.map((station) => {
                 if (station.channels) {
                   return station.stations.map((localChannel) =>
                     station.channels!.map((channel) => (
-                      <EmblaSlide
+                      <li
+                        className="w-32"
                         key={`${station.id}-${channel.name}`}
                         onClick={() =>
                           setStation({
@@ -133,12 +133,13 @@ export default function StationsList(): ReactElement {
                           alt={station.name}
                         />
                         <h3 className="text-sm">{`${localChannel.name} ${channel.name}`}</h3>
-                      </EmblaSlide>
+                      </li>
                     ))
                   );
                 } else {
                   return station.stations.map((channel) => (
-                    <EmblaSlide
+                    <li
+                      className="w-32"
                       key={channel.name}
                       onClick={() =>
                         setStation({
@@ -159,12 +160,12 @@ export default function StationsList(): ReactElement {
                         alt={channel.name}
                       />
                       <h3 className="text-sm">{channel.name}</h3>
-                    </EmblaSlide>
+                    </li>
                   ));
                 }
               })}
-            </EmblaContainer>
-          </Embla>
+            </ul>
+          </div>
         </section>
       ))}
     </>

@@ -1,5 +1,4 @@
 import { REGIONS } from "./constants/regions";
-import { Embla, EmblaSlide, EmblaContainer } from "./components/embla";
 import MiniPlayer from "./components/miniPlayer";
 import { useAudioStore, removeRecentStation } from "./store/useAudioStore";
 import { useRegionStore } from "./store/useRegionStore";
@@ -112,13 +111,13 @@ export default function Home() {
         <section>
           <h2 className="py-4 text-2xl font-bold">최근 재생한 방송국</h2>
           {recentStations.length > 0 ? (
-            <Embla>
-              <EmblaContainer>
+            <div className="overflow-x-auto overflow-y-hidden">
+              <ul className="w-fit flex flex-row gap-x-4 py-4">
                 {recentStations.map((station) => (
-                  <EmblaSlide
+                  <li
                     key={station.streamUrl}
                     onClick={() => setStation(station)}
-                    className="recent-station relative"
+                    className="recent-station relative w-32"
                   >
                     <button
                       className="recent-station-del-btn absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 shadow-lg rounded-full bg-white p-1 "
@@ -148,10 +147,10 @@ export default function Home() {
                       alt={station.name}
                     />
                     <h3 className="text-sm">{station.name}</h3>
-                  </EmblaSlide>
+                  </li>
                 ))}
-              </EmblaContainer>
-            </Embla>
+              </ul>
+            </div>
           ) : (
             <p className="py-4">최근 재생한 방송국 목록이 여기에 표시됩니다.</p>
           )}

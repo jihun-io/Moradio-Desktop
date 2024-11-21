@@ -7,13 +7,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foreground-light: rgba(23, 23, 23, 0.5);
   --highlight: #dc2e2e;
+  --highlight-light: rgba(220, 46, 46, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --foreground-light: #ededed80;
     --highlight: #dc2e2e;
   }
 }
@@ -53,11 +56,11 @@ body {
   cursor: pointer;
 }
 
-.embla__slide > button {
+.recent-station > button {
   display: none;
 }
 
-.embla__slide:hover > button {
+.recent-station:hover > button {
   display: block;
 }
 
@@ -80,6 +83,25 @@ input.volume-slider::-webkit-slider-thumb {
   background: var(--highlight);
   cursor: pointer;
   border-radius: 50%;
+}
+
+main::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+main::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+main::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  background-color: var(--foreground-light);
+  border-radius: 4px;
+  background-clip: padding-box;
+  border: 2px solid var(--background);
 }
 
 @layer utilities {
