@@ -58,7 +58,7 @@ sequenceDiagram
     Note over TP: HLS.js로<br/>스트리밍 재생
 ```
 
-## 5. 지원하는 디바이스
+## 5. 지원하는 운영체제
 - Windows (x64)
 - macOS (Apple silicon, x64)
 
