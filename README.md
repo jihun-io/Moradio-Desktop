@@ -29,7 +29,6 @@
 - TypeScript
 - Tailwind CSS
 - Cloudflare Workers
-- Cloudflare Pages
 
 ## 3. 주요 기능
 
