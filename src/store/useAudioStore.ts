@@ -150,9 +150,12 @@ export const useAudioStore = create<AudioStore>((set, get) => ({
       // 재시작
       set({ isLoading: true });
 
-      fetch(`/radio-proxy/stream/${currentStation.streamUrl}`)
-        .then((response) => {
-          const finalUrl = response.url;
+      fetch(
+        `${window.electron.env.API_URL}/stream-json/${currentStation.streamUrl}`
+      )
+        .then(async (response) => {
+          const result = await response.json();
+          const finalUrl = result.url;
 
           if (Hls.isSupported()) {
             const newHls = new Hls();
